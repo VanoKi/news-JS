@@ -1,21 +1,28 @@
-export interface NewSource {
+export interface NewsSource {
     id: string | null;
     name: string;
 }
 export interface NewsArticle {
-    source: NewSource;
+    source: NewsSource;
+    title: string;
     author: string | null;
-    descriotion: string | null;
+    description: string | null;
     url: string;
     urlToImage: string | null;
     publishedAt: string;
 }
-export interface SourcesResponce {
+export interface SourcesResponse {
     status: 'ok';
-    sources: NewSource[];
+    sources: NewsSource[];
 }
-export interface ArticlesResponce {
+export interface ArticlesResponse {
     status: 'ok';
     totalResults: number;
     articles: NewsArticle[];
 }
+export interface NewsApiError {
+    status: 'error';
+    code: string;
+    message: string;
+}
+export type NewsApiResponse = SourcesResponse | ArticlesResponse | NewsApiError;
