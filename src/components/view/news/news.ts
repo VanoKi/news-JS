@@ -24,10 +24,11 @@ class News {
 
             if (idx % 2) getRequiredElement<HTMLElement>(newsClone, '.news__item').classList.add('alt');
 
-            getRequiredElement<HTMLElement>(newsClone, '.news__meta-photo').style.backgroundImage = `url(${ 
+            getRequiredElement<HTMLElement>(newsClone, '.news__meta-photo').style.backgroundImage = `url(${
                 item.urlToImage || 'img/news_placeholder.jpg'
             })`;
-            getRequiredElement<HTMLElement>(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
+            getRequiredElement<HTMLElement>(newsClone, '.news__meta-author').textContent =
+                item.author || item.source.name;
             getRequiredElement<HTMLElement>(newsClone, '.news__meta-date').textContent = item.publishedAt
                 .slice(0, 10)
                 .split('-')
