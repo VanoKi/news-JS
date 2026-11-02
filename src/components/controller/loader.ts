@@ -1,15 +1,25 @@
+import { NewsApiResponse } from '../../types/news';
+
 class Loader {
-    constructor(baseLink, options) {
+    private readonly baseLink: string;
+    private readonly options: Record<string, string>;
+    constructor(baseLink: string, options: Record<string, string>) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} },
-        callback = () => {
+        {
+            endpoint,
+            options = {},
+        }: {
+            endpoint: string;
+            options?: Record<string, string>;
+        },
+        callback: (data: NewsApiResponse) => void = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load('GET', endpoint, callback, options);
     }
 
