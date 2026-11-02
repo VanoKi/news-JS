@@ -10,3 +10,12 @@ export interface NewsArticle {
     urlToImage: string | null;
     publishedAt: string;
 }
+export interface SourcesResponce {
+    status: 'ok';
+    sources: NewSource[];
+}
+export interface ArticlesResponce {
+    status: 'ok';
+    totalResults: number;
+    articles: NewsArticle[];
+}
