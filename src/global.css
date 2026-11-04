@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    width: min(100% - 2rem, 1100px);
+    width: min(calc(100% - 2rem), 1600px);
     margin: 0 auto;
     padding: clamp(1rem, 3vw, 2rem) 0 0.5rem;
 }
@@ -24,7 +24,7 @@ header h1 {
 }
 
 main {
-    width: min(100% - 2rem, 1100px);
+    width: min(calc(100% - 2rem), 1600px);
     margin: 0 auto;
 }
 
