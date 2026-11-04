@@ -8,7 +8,7 @@ class Loader {
         this.options = options;
     }
 
-    getResp(
+    getResp<T extends NewsApiResponse = NewsApiResponse>(
         {
             endpoint,
             options = {},
@@ -16,11 +16,11 @@ class Loader {
             endpoint: NewsEndpoint;
             options?: Record<string, string>;
         },
-        callback: (data: NewsApiResponse) => void = () => {
+        callback: (data: T) => void = () => {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load('GET', endpoint, callback, options);
+        this.load<T>('GET', endpoint, callback, options);
     }
 
     errorHandler(res: Response) {
@@ -44,16 +44,16 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(
+    load<T extends NewsApiResponse>(
         method: 'GET',
         endpoint: NewsEndpoint,
-        callback: (data: NewsApiResponse) => void,
+        callback: (data: T) => void,
         options: Record<string, string> = {}
     ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data) => callback(data))
+            .then((res): Promise<T> => res.json())
+            .then((data: T) => callback(data))
             .catch((err) => console.error(err));
     }
 }
