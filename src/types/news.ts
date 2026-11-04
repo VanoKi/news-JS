@@ -1,3 +1,8 @@
+export enum NewsEndpoint {
+    Sources = 'sources',
+    Everything = 'everything',
+}
+
 export interface NewsSource {
     id: string | null;
     name: string;

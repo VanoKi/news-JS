@@ -1,4 +1,4 @@
-import { NewsApiResponse } from '../../types/news';
+import type { NewsApiResponse, NewsEndpoint } from '../../types/news';
 
 class Loader {
     private readonly baseLink: string;
@@ -13,7 +13,7 @@ class Loader {
             endpoint,
             options = {},
         }: {
-            endpoint: string;
+            endpoint: NewsEndpoint;
             options?: Record<string, string>;
         },
         callback: (data: NewsApiResponse) => void = () => {
@@ -33,7 +33,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Record<string, string>, endpoint: string) {
+    makeUrl(options: Record<string, string>, endpoint: NewsEndpoint) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -46,7 +46,7 @@ class Loader {
 
     load(
         method: 'GET',
-        endpoint: string,
+        endpoint: NewsEndpoint,
         callback: (data: NewsApiResponse) => void,
         options: Record<string, string> = {}
     ): void {
