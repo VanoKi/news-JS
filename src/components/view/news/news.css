@@ -1,8 +1,16 @@
+.news {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
 .news__item {
     display: flex;
     flex-direction: column;
-    margin: 1rem auto;
-    margin-bottom: 1.6%;
+    width: 100%;
+    max-width: 800px;
+    min-width: 0;
+    margin: 0;
     background: #fff;
     color: #333;
     line-height: 1.4;
@@ -17,7 +25,9 @@
 
 .news__item .news__meta {
     position: relative;
-    height: 200px;
+    height: clamp(160px, 48vw, 220px);
+    flex: 0 0 auto;
+    overflow: hidden;
 }
 
 .news__item .news__meta-photo {
@@ -53,6 +63,7 @@
 }
 
 .news__item .news__description {
+    min-width: 0;
     padding: 1rem;
     background: #fff;
     position: relative;
@@ -62,7 +73,8 @@
 .news__item .news__description h2 {
     line-height: 1;
     margin: 0;
-    font-size: 1.7rem;
+    font-size: clamp(1.35rem, 4vw, 1.7rem);
+    overflow-wrap: anywhere;
 }
 
 .news__item .news__description h3 {
@@ -100,6 +112,7 @@
 
 .news__item p {
     margin: 1rem 0 0;
+    overflow-wrap: anywhere;
 }
 
 .news__item p:first-of-type {
@@ -124,12 +137,13 @@
 @media (min-width: 640px) {
     .news__item {
         flex-direction: row;
-        max-width: 700px;
+        max-width: 800px;
     }
 
     .news__item .news__meta {
         flex-basis: 40%;
         height: auto;
+        min-height: 250px;
     }
 
     .news__item .news__description {
@@ -162,5 +176,56 @@
 
     .news__item.alt .news__meta-details {
         padding-left: 25px;
+    }
+}
+
+@media (max-width: 639px) {
+    .news__item .news__meta-details {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        height: auto;
+        padding: 0.65rem 0.85rem;
+        transition: none;
+    }
+
+    .news__item:hover .news__meta-photo {
+        transform: none;
+    }
+}
+
+@media (min-width: 900px) {
+    .news {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .news__item {
+        max-width: none;
+    }
+}
+
+@media (min-width: 1500px) {
+    .news {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+
+    .news__item,
+    .news__item.alt {
+        flex-direction: column;
+    }
+
+    .news__item .news__meta {
+        height: clamp(180px, 14vw, 240px);
+        min-height: 0;
+    }
+
+    .news__item .news__description {
+        flex: 1;
+    }
+
+    .news__item .news__description:before {
+        display: none;
     }
 }
